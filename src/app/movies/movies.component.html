@@ -1,0 +1,110 @@
+<div class="container">
+
+    <!-- search bar with button -->
+    <!-- <div>
+        <div class="row mt-4 mb-3">
+            <div class="col-sm-9 col-md-7 offset-md-1">
+                <div class="form-group">
+                    <input type="text" #title class="form-control"
+                        placeholder="search with movie/series name... e.g. the avengers" />
+                </div>
+            </div>
+            <div class="col-sm-3 col-md-3">
+                <button class="btn btn-block btn-primary" (click)="submitFunc(title.value)">Submit</button>
+            </div>
+        </div>
+    </div> -->
+
+    <div class="row mt-4">
+        <div class="col-sm-12 col-lg-8 offset-lg-2">
+            <div class="input-group mb-3">
+                <input type="text" #title class="form-control" placeholder="serch here..."
+                    aria-label="Recipient's username" aria-describedby="button-addon2">
+                <div class="input-group-append">
+                    <button class="btn btn-success" type="button" id="button-addon2"
+                        (click)="submitFunc(title.value)">Button</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="loadingFlag">
+        <div class="d-flex justify-content-center">
+            <div class="spinner-border" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Selected movie card details -->
+    <div *ngIf="movieDetails && movieDetailsFlag">
+        <div class="row">
+            <div class="col-sm-12 col-lg-10 offset-lg-1">
+                <div class="card text-white bg-dark mb-3">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-5">
+                            <img src="{{movieDetails.Poster}}" height="100%" width="100%" alt="Movie Poster">
+                        </div>
+                        <div class="col-sm-12 col-md-7">
+                            <div class="card-body">
+                                <h5 class="card-title font-weight-bold display-5">{{movieDetails?.Title}}</h5>
+                                <ul class="list-inline">
+                                    <li class="list-inline-item badge badge-light">{{movieDetails?.Released}}</li>
+                                    <li class="list-inline-item badge badge-light">{{movieDetails?.Runtime}}</li>
+                                    <li class="list-inline-item badge badge-light">{{movieDetails?.Genre}}</li>
+                                </ul>
+                                <p *ngIf="movieDetails.imdbRating && movieDetails.imdbVotes">
+                                    <span class="font-weight-bold">IMBD</span> : <span
+                                        class="text-danger">{{movieDetails.imdbRating}}</span> <span><small>
+                                            ({{movieDetails.imdbVotes}} votes)</small></span>
+                                </p>
+                                <p *ngIf="movieDetails.Plot" class="card-text font-italic">{{movieDetails.Plot}}</p>
+                                <p class="catd-text">
+                                    <span class="font-weight-bold">Director : </span>{{movieDetails.Director}}
+                                </p>
+                                <p class="catd-text">
+                                    <span class="font-weight-bold">Cast : </span>{{movieDetails.Actors}}
+                                </p>
+                                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button class="btn btn-block btn-outline-danger mb-5" (click)="movieDetailsFlag = false">Go Back to
+                    Search</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Searched movie result cards -->
+    <div *ngIf="moviesArray.length > 0 && !movieDetailsFlag">
+        <div class="row row-cols-1 row-cols-md-3">
+            <div *ngFor="let movie of moviesArray" class="col mb-4">
+                <div class="card h-100 shadow-sm card-class">
+                    <img src="{{movie.Poster}}" height="300px" class="card-img-top" alt="{{movie.Title}} poster">
+                    <div class="card-body">
+                        <h5 class="card-title font-weight-bold">{{movie.Title}}</h5>
+                        <ul class="list-inline">
+                            <li class="list-inline-item badge badge-info badge-class">{{movie.Year}}</li>
+                            <li class="list-inline-item badge badge-info badge-class">{{movie.Type}}</li>
+                        </ul>
+                        <p class="card-text text-muted"><span class="font-weight-normal">IMDB Id :
+                            </span>{{movie.imdbID}}
+                        </p>
+                    </div>
+                    <div class="card-footer">
+                        <button class="btn btn-outline-primary float-right" (click)="callFunc(movie.imdbID)">Know
+                            more</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Error message -->
+    <div *ngIf="errorMessage && !movieDetailsFlag" class="text-danger text-center">
+        <p class="display-6 font-weight-bold">{{errorMessage}}</p>
+    </div>
+
+</div>

@@ -1,0 +1,12 @@
+.card-class:hover {
+    transform: scale(1.015);
+}
+
+.badge-class:hover {
+    transform: scale(1.2);
+}
+
+.card-footer {
+    background: transparent;
+    border: 0px;
+}
