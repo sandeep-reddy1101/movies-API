@@ -28,6 +28,7 @@
         </div>
     </div>
 
+    <!-- Loading spinner -->
     <div *ngIf="loadingFlag">
         <div class="d-flex justify-content-center">
             <div class="spinner-border" role="status">
@@ -56,7 +57,7 @@
                                 </ul>
                                 <p *ngIf="movieDetails.imdbRating && movieDetails.imdbVotes">
                                     <span class="font-weight-bold">IMBD</span> : <span
-                                        class="text-danger">{{movieDetails.imdbRating}}</span> <span><small>
+                                        class="text-danger font-weight-bold">{{movieDetails.imdbRating}}</span> <span><small>
                                             ({{movieDetails.imdbVotes}} votes)</small></span>
                                 </p>
                                 <p *ngIf="movieDetails.Plot" class="card-text font-italic">{{movieDetails.Plot}}</p>
@@ -65,6 +66,9 @@
                                 </p>
                                 <p class="catd-text">
                                     <span class="font-weight-bold">Cast : </span>{{movieDetails.Actors}}
+                                </p>
+                                <p class="catd-text">
+                                    <span class="font-weight-bold">Writer : </span>{{movieDetails.Writer}}
                                 </p>
                                 <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
                             </div>

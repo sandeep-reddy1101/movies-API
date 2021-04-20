@@ -1,0 +1,8 @@
+#nav-link-1:hover, #nav-link-2:hover{
+    color: green;
+    font-weight: bold;
+}
+
+#nav-link-1:active, #nav-link-2:active{
+    color: blue;
+}
