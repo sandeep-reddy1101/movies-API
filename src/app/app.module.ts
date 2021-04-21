@@ -7,16 +7,21 @@ import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { MoviesComponent } from './movies/movies.component';
 
+import {MatIconModule} from '@angular/material/icon';
+import { SuggestionsComponent } from './suggestions/suggestions.component'
+
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
-    MoviesComponent
+    MoviesComponent,
+    SuggestionsComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    MatIconModule
   ],
   providers: [],
   bootstrap: [AppComponent]
