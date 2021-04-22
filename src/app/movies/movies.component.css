@@ -10,3 +10,7 @@
     background: transparent;
     border: 0px;
 }
+
+.card-title {
+    font-size: 28px;
+}

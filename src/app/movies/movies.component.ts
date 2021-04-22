@@ -15,7 +15,7 @@ export class MoviesComponent implements OnInit {
   movieDetailsFlag : boolean = false;
   loadingFlag : boolean = false;
   searchedMoviesInLocalStorage : string[] = [];
-  viewedMoviesInLocalStorage : string[] = [];
+  viewedMoviesInLocalStorage : any[] = [];
 
   constructor(private services:ApiServicesService) { }
 
@@ -48,6 +48,8 @@ export class MoviesComponent implements OnInit {
       if(response.Response === 'True'){
         this.loadingFlag = false
         this.movieDetails = response;
+
+        this.removeMovieFromLocalStorage(this.movieDetails);
 
         //Storing the movieDetails which user viewed in local storage variable
         this.viewedMoviesInLocalStorage.push(this.movieDetails);
@@ -137,6 +139,16 @@ export class MoviesComponent implements OnInit {
     }else if(variableName === 'searchedMovies'){
       this.initializeSearchedMovies();
     }
+  }
+
+  removeMovieFromLocalStorage(movie:any){
+    this.viewedMoviesInLocalStorage = this.viewedMoviesInLocalStorage.filter(data=>{
+      if(data.imdbID === movie.imdbID){
+        return false
+      }else{
+        return true
+      }
+    })
   }
 
 }

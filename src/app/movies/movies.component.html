@@ -1,26 +1,12 @@
 <div class="container">
 
-    <!-- search bar with button -->
-    <!-- <div>
-        <div class="row mt-4 mb-3">
-            <div class="col-sm-9 col-md-7 offset-md-1">
-                <div class="form-group">
-                    <input type="text" #title class="form-control"
-                        placeholder="search with movie/series name... e.g. the avengers" />
-                </div>
-            </div>
-            <div class="col-sm-3 col-md-3">
-                <button class="btn btn-block btn-primary" (click)="submitFunc(title.value)">Submit</button>
-            </div>
-        </div>
-    </div> -->
-
     <!-- Search Bar with search button -->
+    <!-- Even works when clicked on enter button -->
     <div class="row mt-4">
         <div class="col-sm-12 col-md-8 offset-md-2">
             <div class="input-group mb-3">
-                <input type="text" #title class="form-control" placeholder="serch with movie name..."
-                    aria-label="Recipient's username" aria-describedby="button-addon2">
+                <input type="text" #title class="form-control" placeholder="Search with movie name..."
+                    aria-label="Recipient's username" aria-describedby="button-addon2" (keydown.enter)="submitFunc(title.value)">
                 <div class="input-group-append">
                     <button class="btn btn-success" type="button" id="button-addon2"
                         (click)="submitFunc(title.value)">Search</button>
@@ -49,7 +35,7 @@
                         </div>
                         <div class="col-sm-12 col-md-7">
                             <div class="card-body">
-                                <h5 class="card-title font-weight-bold display-5">{{movieDetails?.Title}}</h5>
+                                <h5 class="card-title font-weight-bold text-primary">{{movieDetails?.Title}}</h5>
                                 <ul class="list-inline">
                                     <li class="list-inline-item badge badge-light">{{movieDetails?.Released}}</li>
                                     <li class="list-inline-item badge badge-light">{{movieDetails?.Runtime}}</li>
@@ -62,6 +48,9 @@
                                             ({{movieDetails.imdbVotes}} votes)</small></span>
                                 </p>
                                 <p *ngIf="movieDetails.Plot" class="card-text font-italic">{{movieDetails.Plot}}</p>
+                                <p class="catd-text">
+                                    <span class="font-weight-bold">Languages : </span>{{movieDetails.Language}}
+                                </p>
                                 <p class="catd-text">
                                     <span class="font-weight-bold">Director : </span>{{movieDetails.Director}}
                                 </p>

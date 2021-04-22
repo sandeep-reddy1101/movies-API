@@ -1,4 +1,4 @@
-
+<!-- viewed movies cards -->
 <section *ngIf="moviesArray.length > 0" class="pt-4 pb-5">
     <div class="container">
         <div class="row">
@@ -7,8 +7,7 @@
                 <h5 *ngIf="arrayLength === 2" class="mb-3">Recently viewed movies </h5>
             </div>
             <div class="col-5 text-right">
-                <a class="btn btn-primary mb-3 mr-1" href="#carouselExampleIndicators2" role="button"
-                    data-slide="prev">
+                <a class="btn btn-primary mb-3 mr-1" href="#carouselExampleIndicators2" role="button" data-slide="prev">
                     <i class="bi-caret-left-fill"></i>
                 </a>
                 <a class="btn btn-primary mb-3 " href="#carouselExampleIndicators2" role="button" data-slide="next">
@@ -18,13 +17,14 @@
             <div class="col-12">
                 <div id="carouselExampleIndicators2" class="carousel slide" data-ride="carousel">
                     <div class="carousel-inner">
-                        <div *ngFor="let moviesArr of moviesArray; index as i" class="carousel-item {{ i == 0?'active':''}}">
-                            <div *ngIf="moviesArr.length > 0">
+                        <div *ngFor="let moviesArr of moviesArray; index as i"
+                            class="carousel-item {{ i == 0?'active':''}}">
                             <div class="row">
-                                    <div *ngFor="let movie of moviesArr" class="{{columnClassForCard}} mb-3">
-                                        <div *ngIf="movie">
-                                            <a [routerLink]="['/movie', movie.imdbID]"><img src="{{movie.Poster}}" alt="{{movie.Title}} poster" class="img-fluid rounded" width="100%" [style.height]="cardHeightClass"/></a>
-                                        </div>
+                                <div *ngFor="let movie of moviesArr" class="{{columnClassForCard}} mb-3">
+                                    <div *ngIf="movie" class="movie-img">
+                                        <a [routerLink]="['/movie', movie.imdbID]"><img src="{{movie.Poster}}"
+                                                alt="{{movie.Title}} poster" class="img-fluid rounded" width="100%"
+                                                [style.height]="cardHeightClass" /></a>
                                     </div>
                                 </div>
                             </div>
