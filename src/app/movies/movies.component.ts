@@ -32,7 +32,6 @@ export class MoviesComponent implements OnInit {
       this.loadingFlag = true;
       this.movieTitle = title;
       this.searchFunc();
-
       this.searchedMoviesInLocalStorage.push(title);
       this.setArrayToLocalStorage('searchedMovies',this.searchedMoviesInLocalStorage);
     }
@@ -49,7 +48,11 @@ export class MoviesComponent implements OnInit {
       if(response.Response === 'True'){
         this.loadingFlag = false
         this.movieDetails = response;
-        console.log(this.movieDetails);
+
+        //Storing the movieDetails which user viewed in local storage variable
+        this.viewedMoviesInLocalStorage.push(this.movieDetails);
+        this.setArrayToLocalStorage('viewedMovies',this.viewedMoviesInLocalStorage);
+
       }else{
         // if response is false
         this.loadingFlag = false;
@@ -59,12 +62,9 @@ export class MoviesComponent implements OnInit {
       // If ERROR occured from backend
       this.loadingFlag = false;
       this.errorMessage = "Some ERROR occured. Please try again!!!"
-      console.log(error.error)
+      console.log('ERROR from backend',error.error)
     }
     )
-
-    this.viewedMoviesInLocalStorage.push(id);
-    this.setArrayToLocalStorage('viewedMovies',this.viewedMoviesInLocalStorage)
   }
 
   searchFunc(){
@@ -72,11 +72,14 @@ export class MoviesComponent implements OnInit {
     this.services.searchAPIbasedOnText(this.movieTitle).subscribe(
       data=>{
         console.log(data)
+
         // if response if TRUE then assigning the array to moviesArray
         if(data.Response === 'True'){
-          console.log('movies in array',data);
           this.loadingFlag = false;
-          this.moviesArray = data.Search.sort((a:any,b:any) => b.Year - a.Year); // assigning the sorted array according to year
+
+          //Sorting the array according to year and assigning to moviesArray variable
+          this.moviesArray = data.Search.sort((a:any,b:any) => b.Year - a.Year);
+
         }else{
           // if response is false
           this.loadingFlag = false;
@@ -84,7 +87,7 @@ export class MoviesComponent implements OnInit {
         }
       },err=>{
         // if error occured from backend
-        console.log('search error',err);
+        console.log('error from backend',err);
         this.loadingFlag = false;
         this.errorMessage = "Some ERROR occured. Please try again!!!"
       }
@@ -121,12 +124,14 @@ export class MoviesComponent implements OnInit {
   }
 
   //Function to set array to searchedMovies variable in local storage
-  setArrayToLocalStorage(variableName:string, arr:string[]){
+  setArrayToLocalStorage(variableName:string, arr:any[]){
+    //This if else is useful to restrict the movies to 20 which are stored in local storage
     if(arr.length >= 21){
       localStorage.setItem(variableName,JSON.stringify(arr.slice(1,21)));
     }else{
       localStorage.setItem(variableName,JSON.stringify(arr));
     }
+
     if(variableName === 'viewedMovies'){
       this.initializeViewedMovies();
     }else if(variableName === 'searchedMovies'){

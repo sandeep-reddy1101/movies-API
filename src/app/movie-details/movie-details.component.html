@@ -1,42 +1,52 @@
-<div *ngIf="movieDetails">
-    <div class="row mt-5">
-        <div class="col-sm-12 col-lg-10 offset-lg-1">
-            <div class="card text-white bg-dark mb-3">
-                <div class="row">
-                    <div class="col-sm-12 col-md-5">
-                        <img src="{{movieDetails.Poster}}" height="100%" width="100%" alt="Movie Poster">
-                    </div>
-                    <div class="col-sm-12 col-md-7">
-                        <div class="card-body">
-                            <h5 class="card-title font-weight-bold display-5">{{movieDetails?.Title}}</h5>
-                            <ul class="list-inline">
-                                <li class="list-inline-item badge badge-light">{{movieDetails?.Released}}</li>
-                                <li class="list-inline-item badge badge-light">{{movieDetails?.Runtime}}</li>
-                                <li class="list-inline-item badge badge-light">{{movieDetails?.Genre}}</li>
-                            </ul>
-                            <p *ngIf="movieDetails.imdbRating && movieDetails.imdbVotes">
-                                <span class="font-weight-bold">IMBD</span> : <span
-                                    class="text-danger font-weight-bold">{{movieDetails.imdbRating}}</span>
-                                <span><small>
-                                        ({{movieDetails.imdbVotes}} votes)</small></span>
-                            </p>
-                            <p *ngIf="movieDetails.Plot" class="card-text font-italic">{{movieDetails.Plot}}</p>
-                            <p class="catd-text">
-                                <span class="font-weight-bold">Director : </span>{{movieDetails.Director}}
-                            </p>
-                            <p class="catd-text">
-                                <span class="font-weight-bold">Cast : </span>{{movieDetails.Actors}}
-                            </p>
-                            <p class="catd-text">
-                                <span class="font-weight-bold">Writer : </span>{{movieDetails.Writer}}
-                            </p>
-                            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+<div class="container-fluid">
+    <div *ngIf="movieDetails">
+        <div class="row mt-5">
+            <div class="col-sm-12 col-lg-10 offset-lg-1">
+                <div class="card text-white bg-dark mb-3">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-5">
+                            <img src="{{movieDetails.Poster}}" height="100%" width="100%" alt="Movie Poster">
+                        </div>
+                        <div class="col-sm-12 col-md-7">
+                            <div class="card-body">
+                                <h5 class="card-title font-weight-bold display-5">{{movieDetails?.Title}}</h5>
+                                <ul class="list-inline">
+                                    <li class="list-inline-item badge badge-light">{{movieDetails?.Released}}</li>
+                                    <li class="list-inline-item badge badge-light">{{movieDetails?.Runtime}}</li>
+                                    <li class="list-inline-item badge badge-light">{{movieDetails?.Genre}}</li>
+                                </ul>
+                                <p *ngIf="movieDetails.imdbRating && movieDetails.imdbVotes">
+                                    <span class="font-weight-bold">IMBD</span> : <span
+                                        class="text-danger font-weight-bold">{{movieDetails.imdbRating}}</span>
+                                    <span><small>
+                                            ({{movieDetails.imdbVotes}} votes)</small></span>
+                                </p>
+                                <p *ngIf="movieDetails.Plot" class="card-text font-italic">{{movieDetails.Plot}}</p>
+                                <p class="catd-text">
+                                    <span class="font-weight-bold">Director : </span>{{movieDetails.Director}}
+                                </p>
+                                <p class="catd-text">
+                                    <span class="font-weight-bold">Cast : </span>{{movieDetails.Actors}}
+                                </p>
+                                <p class="catd-text">
+                                    <span class="font-weight-bold">Writer : </span>{{movieDetails.Writer}}
+                                </p>
+                                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                            </div>
                         </div>
                     </div>
                 </div>
+                <button class="btn btn-block btn-outline-danger mb-5" [routerLink]="['/movies']">Go Back to
+                    Search</button>
             </div>
-            <button class="btn btn-block btn-outline-danger mb-5" [routerLink]="['/movies']">Go Back to
-                Search</button>
+        </div>
+    </div>
+    
+    <div *ngIf="loadingFlag">
+        <div class="d-flex justify-content-center">
+            <div class="spinner-border" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
         </div>
     </div>
 </div>

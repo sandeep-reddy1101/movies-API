@@ -1,5 +1,4 @@
 import { Component, HostListener, Input, OnInit, SimpleChange } from '@angular/core';
-import { ApiServicesService } from '../api-services.service';
 
 @Component({
   selector: 'app-suggestions',
@@ -13,7 +12,6 @@ export class SuggestionsComponent implements OnInit {
   columnClassForCard : string = '';
   cardHeightClass : string = '';
   moviesArray : any[] = [];
-  viewedMoviesPresentInLocalStorage: string[] = [];
   movieDetailsArray : any[] = [];
   arrayLength: number = 0;
   lengthOfMoviesArray : number = 0;
@@ -26,47 +24,23 @@ export class SuggestionsComponent implements OnInit {
   getScreenSize() {
     this.scrHeight = window.innerHeight;
     this.scrWidth = window.innerWidth;
-    if(this.viewedMoviesPresentInLocalStorage && this.viewedMoviesPresentInLocalStorage.length > 0){
+    if(this.movieDetailsArray && this.movieDetailsArray.length > 0){
       this.updatedArrayLength();
     }
   }
 
-  constructor(private services:ApiServicesService) {
+  constructor() {
   }
 
   ngOnInit(): void {
-    let moviesInLocalStorage = localStorage.getItem('viewedMovies');
-    if (moviesInLocalStorage && moviesInLocalStorage.length > 0) {
-      this.viewedMoviesPresentInLocalStorage = JSON.parse(moviesInLocalStorage);
-      this.lengthOfMoviesArray = this.viewedMoviesPresentInLocalStorage.length;
-    }
-    this.getMovieDetails();
+    this.movieDetailsArray = this._MOVIES;
+    this.lengthOfMoviesArray = this.movieDetailsArray.length;
     this.getScreenSize();
   }
 
   ngOnChanges(changes:SimpleChange){
-    this.viewedMoviesPresentInLocalStorage = this._MOVIES;
-    this.getMovieDetails();
-  }
-
-  //Function is used to retrive the movie details based on movie imdb id
-  getMovieDetails(){
-    let movieDetailsArray:any[] = [];
-    this.viewedMoviesPresentInLocalStorage.forEach(
-      id => {
-        this.services.searchAPIbasedOnID(id).subscribe(
-          res => {
-            if(res.Response === 'True'){
-              movieDetailsArray.push(res);
-              this.movieDetailsArray = movieDetailsArray;
-              if(this.movieDetailsArray.length === this.viewedMoviesPresentInLocalStorage.length){
-                this.updateArray();
-              }
-            }
-          }
-        )
-      }
-    )
+    this.movieDetailsArray = this._MOVIES;
+    this.updateArray();
   }
 
   //Function to update length of array when screen width changes
@@ -93,13 +67,18 @@ export class SuggestionsComponent implements OnInit {
     if(this.previousArrayLength !== this.arrayLength){
       this.previousArrayLength = this.arrayLength;
 
-      //checking whether moviesArray has something and calling updateArray function
+      //checking whether moviesDetailsArray has something and calling updateArray function
       this.movieDetailsArray.length>0 && this.updateArray();
     }
   }
 
   //Based on arraylength this function updated the array somthing like this [[a,b],[c,d]]
   updateArray(){
+
+    //reversing the array
+    let x = [...this.movieDetailsArray].reverse();
+    this.movieDetailsArray = x;
+
     let finalArray = [];
     const len = Math.ceil(this.lengthOfMoviesArray/this.arrayLength);
     let index = 0;
