@@ -1,6 +1,5 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { ApiServicesService } from '../api-services.service';
 
 @Component({
   selector: 'app-movies',
@@ -11,7 +10,6 @@ export class MoviesComponent implements OnInit {
 
   movieTitle : string = '';
   moviesArray: any[] = [];
-  API_KEY : string = '52b1a0fb';
   movieDetails : any;
   errorMessage : any = '';
   movieDetailsFlag : boolean = false;
@@ -19,7 +17,7 @@ export class MoviesComponent implements OnInit {
   searchedMoviesInLocalStorage : string[] = [];
   viewedMoviesInLocalStorage : string[] = [];
 
-  constructor(private http:HttpClient) { }
+  constructor(private services:ApiServicesService) { }
 
   ngOnInit(): void {
     this.checkingAndInitializingLocalStorage();
@@ -44,7 +42,8 @@ export class MoviesComponent implements OnInit {
     this.movieDetails = '';
     this.loadingFlag = true;
     this.movieDetailsFlag = true;
-    this.searchAPIbasedOnID(id).subscribe(
+    //Calling API service component
+    this.services.searchAPIbasedOnID(id).subscribe(
       response=>{
       // IF response is true then assigning the response to movieDetails
       if(response.Response === 'True'){
@@ -69,7 +68,8 @@ export class MoviesComponent implements OnInit {
   }
 
   searchFunc(){
-    this.searchAPIbasedOnText().subscribe(
+    //Calling API services component
+    this.services.searchAPIbasedOnText(this.movieTitle).subscribe(
       data=>{
         console.log(data)
         // if response if TRUE then assigning the array to moviesArray
@@ -91,18 +91,6 @@ export class MoviesComponent implements OnInit {
     )
   }
 
-  // This function is called when we want to search the movie from API based on IMDB ID
-  searchAPIbasedOnID(id:string):Observable<any>{
-    const API_URL = `https://www.omdbapi.com/?apikey=${this.API_KEY}&`;
-    return this.http.get<any>(API_URL + 'i=' + id);
-  }
-
-  //This function is called when we want to seach the movies from API based on TEXT entered by user
-  searchAPIbasedOnText():Observable<any>{
-    const API_URL = `https://www.omdbapi.com/?apikey=${this.API_KEY}&`;
-    return this.http.get<any>(API_URL + 's=' + this.movieTitle);
-  }
-
   //Function to check whether searchedMovies variable is present in localstorage or not
   //If not then it will initialize searchedMovies with empty array
   checkingAndInitializingLocalStorage(){
@@ -110,6 +98,7 @@ export class MoviesComponent implements OnInit {
     this.initializeViewedMovies();
   }
 
+  //This function checks local storage for search and assign searched movies to variable
   initializeSearchedMovies(){
     let searchedMovies = localStorage.getItem('searchedMovies');
     if(searchedMovies){
@@ -120,6 +109,7 @@ export class MoviesComponent implements OnInit {
     }
   }
 
+  //This function checks local storage for viewed movies by user and assign them to variable
   initializeViewedMovies(){
     let viewedMovies = localStorage.getItem('viewedMovies');
     if(viewedMovies){
@@ -132,7 +122,11 @@ export class MoviesComponent implements OnInit {
 
   //Function to set array to searchedMovies variable in local storage
   setArrayToLocalStorage(variableName:string, arr:string[]){
-    localStorage.setItem(variableName,JSON.stringify(arr));
+    if(arr.length >= 21){
+      localStorage.setItem(variableName,JSON.stringify(arr.slice(1,21)));
+    }else{
+      localStorage.setItem(variableName,JSON.stringify(arr));
+    }
     if(variableName === 'viewedMovies'){
       this.initializeViewedMovies();
     }else if(variableName === 'searchedMovies'){
