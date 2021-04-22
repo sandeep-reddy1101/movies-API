@@ -6,8 +6,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { MoviesComponent } from './movies/movies.component';
-
-import {MatIconModule} from '@angular/material/icon';
 import { SuggestionsComponent } from './suggestions/suggestions.component'
 
 @NgModule({
@@ -20,8 +18,7 @@ import { SuggestionsComponent } from './suggestions/suggestions.component'
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule,
-    MatIconModule
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

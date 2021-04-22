@@ -1,10 +1,51 @@
-<section class="pt-5 pb-5">
+
+<section *ngIf="moviesArray.length > 0" class="pt-5 pb-5">
     <div class="container">
         <div class="row">
-            <div class="col-6">
-                <h3 class="mb-3">Carousel cards title </h3>
+            <div class="col-8">
+                <h4 class="mb-3">Recently viewed movies </h4>
             </div>
-            <div class="col-6 text-right">
+            <div class="col-4 text-right">
+                <a class="btn btn-primary mb-3 mr-1" href="#carouselExampleIndicators2" role="button"
+                    data-slide="prev">
+                    <i class="bi-caret-left-fill"></i>
+                </a>
+                <a class="btn btn-primary mb-3 " href="#carouselExampleIndicators2" role="button" data-slide="next">
+                    <i class="bi-caret-right-fill"></i>
+                </a>
+            </div>
+            <div class="col-12">
+                <div id="carouselExampleIndicators2" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner">
+                        <div *ngFor="let moviesArr of moviesArray; index as i" class="carousel-item {{ i == 0?'active':''}}">
+                            <div *ngIf="moviesArr.length > 0">
+                            <div class="row">
+                                    <div *ngFor="let movie of moviesArr" class="{{columnClassForCard}} mb-3">
+                                        <div *ngIf="movie">
+                                            <div class="card">
+                                                <img src="{{movie.Poster}}" alt="{{movie.Title}} poster" class="card-img-top" width="100%" [style.height]="cardHeightClass"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<!-- <section class="pt-5 pb-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-8">
+                <h4 class="mb-3">Recently viewed movies </h4>
+            </div>
+            <div class="col-4 text-right">
                 <a class="btn btn-primary mb-3 mr-1" href="#carouselExampleIndicators2" role="button"
                     data-slide="prev">
                     <i class="bi-caret-left-fill"></i>
@@ -149,4 +190,4 @@
             </div>
         </div>
     </div>
-</section>
+</section> -->

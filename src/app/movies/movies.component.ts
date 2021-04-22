@@ -106,15 +106,22 @@ export class MoviesComponent implements OnInit {
   //Function to check whether searchedMovies variable is present in localstorage or not
   //If not then it will initialize searchedMovies with empty array
   checkingAndInitializingLocalStorage(){
+    this.initializeSearchedMovies();
+    this.initializeViewedMovies();
+  }
+
+  initializeSearchedMovies(){
     let searchedMovies = localStorage.getItem('searchedMovies');
-    let viewedMovies = localStorage.getItem('viewedMovies');
     if(searchedMovies){
       console.log(JSON.parse(searchedMovies));
       this.searchedMoviesInLocalStorage = JSON.parse(searchedMovies);
     }else{
       localStorage.setItem('searchedMovies',JSON.stringify([]));
     }
+  }
 
+  initializeViewedMovies(){
+    let viewedMovies = localStorage.getItem('viewedMovies');
     if(viewedMovies){
       console.log(JSON.parse(viewedMovies));
       this.viewedMoviesInLocalStorage = JSON.parse(viewedMovies);
@@ -126,6 +133,11 @@ export class MoviesComponent implements OnInit {
   //Function to set array to searchedMovies variable in local storage
   setArrayToLocalStorage(variableName:string, arr:string[]){
     localStorage.setItem(variableName,JSON.stringify(arr));
+    if(variableName === 'viewedMovies'){
+      this.initializeViewedMovies();
+    }else if(variableName === 'searchedMovies'){
+      this.initializeSearchedMovies();
+    }
   }
 
 }

@@ -112,4 +112,6 @@
         <h3>{{errorMessage}}</h3>
     </div>
 
+    <app-suggestions *ngIf="viewedMoviesInLocalStorage.length > 0" [_MOVIES]="viewedMoviesInLocalStorage"></app-suggestions>
+
 </div>
