@@ -73,7 +73,6 @@ export class MoviesComponent implements OnInit {
     //Calling API services component
     this.services.searchAPIbasedOnText(this.movieTitle).subscribe(
       data=>{
-        console.log(data)
 
         // if response if TRUE then assigning the array to moviesArray
         if(data.Response === 'True'){
@@ -107,7 +106,6 @@ export class MoviesComponent implements OnInit {
   initializeSearchedMovies(){
     let searchedMovies = localStorage.getItem('searchedMovies');
     if(searchedMovies){
-      console.log(JSON.parse(searchedMovies));
       this.searchedMoviesInLocalStorage = JSON.parse(searchedMovies);
     }else{
       localStorage.setItem('searchedMovies',JSON.stringify([]));
@@ -118,7 +116,6 @@ export class MoviesComponent implements OnInit {
   initializeViewedMovies(){
     let viewedMovies = localStorage.getItem('viewedMovies');
     if(viewedMovies){
-      console.log(JSON.parse(viewedMovies));
       this.viewedMoviesInLocalStorage = JSON.parse(viewedMovies);
     }else{
       localStorage.setItem('viewedMovies',JSON.stringify([]));

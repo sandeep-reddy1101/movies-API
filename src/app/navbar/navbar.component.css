@@ -6,3 +6,7 @@
 #nav-link-1:active, #nav-link-2:active{
     color: blue;
 }
+
+.navbar {
+    background-image: linear-gradient(#FF61D2, #FE9090);
+}

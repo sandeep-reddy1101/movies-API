@@ -22,4 +22,9 @@ export class ApiServicesService {
     const API_URL = `https://www.omdbapi.com/?apikey=${this.API_KEY}&`;
     return this.http.get<any>(API_URL + 's=' + movieText);
   }
+
+  getIP():Observable<any>{
+    const _URL = 'https://api.db-ip.com/v2/free/self';
+    return this.http.get<any>(_URL);
+  }
 }
