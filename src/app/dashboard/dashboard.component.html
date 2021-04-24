@@ -11,8 +11,8 @@
                     <thead>
                         <tr>
                             <th scope="col">Movie</th>
-                            <th scope="col"><a
-                                    (click)="clearItemFromLocalStorage('viewedMovies')"><i class="bi-trash-fill"></i></a></th>
+                            <th scope="col"><a (click)="clearItemFromLocalStorage('viewedMovies')"><i
+                                        class="bi-trash-fill"></i></a></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -20,8 +20,7 @@
                             <td [routerLink]="['/movie', movie.imdbID]"><span><img src="{{movie.Poster}}"
                                         class="rounded-circle" alt="image" width="45px" height="45px" /></span>
                                 {{movie.Title}}</td>
-                            <td><button class="btn btn-danger btn-sm"
-                                    (click)="deleteMovieFromLocalStorage(movie.imdbID)">Delete</button></td>
+                            <td><a (click)="deleteMovieFromLocalStorage(movie.imdbID)"><i class="bi-x"></i></a></td>
                         </tr>
                     </tbody>
                 </table>
@@ -48,16 +47,16 @@
                         <tr>
                             <th scope="col">Keywords</th>
                             <th scope="col">Date</th>
-                            <th scope="col"><a
-                                    (click)="clearItemFromLocalStorage('allSearches')"><i class="bi-trash-fill"></i></a></th>
+                            <th scope="col"><a (click)="clearItemFromLocalStorage('allSearches')"><i
+                                        class="bi-trash-fill"></i></a></th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr *ngFor="let obj of allSearchedKeywords">
                             <td>{{obj.searchedText}}</td>
                             <td>{{obj.time | date : 'medium'}}</td>
-                            <td><button class="btn btn-danger btn-sm"
-                                    (click)="deleteSearchedKeywordsFromLocalStorage(obj.searchedText)">Delete</button>
+                            <td><a (click)="deleteSearchedKeywordsFromLocalStorage(obj.searchedText)"><i
+                                        class="bi-x"></i></a>
                             </td>
                         </tr>
                     </tbody>
