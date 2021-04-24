@@ -42,4 +42,8 @@ export class MovieDetailsComponent implements OnInit {
     )
   }
 
+  goBack(){
+    window.history.back();
+  }
+
 }

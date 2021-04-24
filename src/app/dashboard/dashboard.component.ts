@@ -15,10 +15,12 @@ export class DashboardComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    //Initially calling these functions to load the local storage data into variables
     this.getviewedMoviesFromLocalStorage();
     this.getAllSearchedKeywordsFromLocalStorage();
   }
 
+  //Function to retrive the values of viewed movies from local storage
   getviewedMoviesFromLocalStorage(){
     this.errorMessage = ''
     let movies = localStorage.getItem('viewedMovies');
@@ -30,6 +32,7 @@ export class DashboardComponent implements OnInit {
     }
   }
 
+  //Function to retrieve the values of allSeaches from local storage
   getAllSearchedKeywordsFromLocalStorage(){
     this.allSearchedKeywords = [];
     this.searchesErrorMessage = '';
@@ -41,6 +44,7 @@ export class DashboardComponent implements OnInit {
     }
   }
 
+  //Function to delete a particular movie from the viewedMovies in local storage
   deleteMovieFromLocalStorage(id:string){
     let new_array = [];
     new_array = this.viewed_movies.filter(movie => {
@@ -55,6 +59,7 @@ export class DashboardComponent implements OnInit {
     this.getviewedMoviesFromLocalStorage();
   }
 
+  //Function to delete a particular value from the allSeaches in local storage
   deleteSearchedKeywordsFromLocalStorage(keyword:string){
     let new_array = [];
     new_array = this.allSearchedKeywords.filter(data=>{
@@ -68,6 +73,7 @@ export class DashboardComponent implements OnInit {
     this.getAllSearchedKeywordsFromLocalStorage();
   }
 
+  //Function to clear all the values of the key in local storage
   clearItemFromLocalStorage(item:string){
     localStorage.removeItem(item);
     if(item === 'allSearches'){

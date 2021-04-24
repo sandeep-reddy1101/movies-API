@@ -9,28 +9,29 @@
             <div *ngIf="viewed_movies.length > 0" class="table-responsive overflow-auto">
                 <table class="table table-striped table-dark table-hover">
                     <thead>
-                      <tr>
-                        <th scope="col">S.no</th>
-                        <th scope="col">Movie</th>
-                        <!-- <th scope="col">IMDB ID</th> -->
-                        <th scope="col"><button class="btn btn-outline-light btn-sm" (click)="clearItemFromLocalStorage('viewedMovies')">Delete all</button></th>
-                      </tr>
+                        <tr>
+                            <th scope="col">Movie</th>
+                            <th scope="col"><a
+                                    (click)="clearItemFromLocalStorage('viewedMovies')"><i class="bi-trash-fill"></i></a></th>
+                        </tr>
                     </thead>
                     <tbody>
-                      <tr *ngFor="let movie of viewed_movies; let i = index">
-                        <th scope="row">{{i + 1}}</th>
-                        <td><span><img src="{{movie.Poster}}" class="rounded-circle" alt="image" width="45px" height="45px"/></span>   {{movie.Title}}</td>
-                        <!-- <td>{{movie.imdbID}}</td> -->
-                        <td><button class="btn btn-danger btn-sm" (click)="deleteMovieFromLocalStorage(movie.imdbID)">Delete</button></td>
-                      </tr>
+                        <tr *ngFor="let movie of viewed_movies">
+                            <td [routerLink]="['/movie', movie.imdbID]"><span><img src="{{movie.Poster}}"
+                                        class="rounded-circle" alt="image" width="45px" height="45px" /></span>
+                                {{movie.Title}}</td>
+                            <td><button class="btn btn-danger btn-sm"
+                                    (click)="deleteMovieFromLocalStorage(movie.imdbID)">Delete</button></td>
+                        </tr>
                     </tbody>
-                  </table>
+                </table>
             </div>
             <div *ngIf="errorMessage" class="row">
                 <div class="col-12 col-lg-8 offset-lg-2">
                     <div class="jumbotron text-center mt-4">
                         <p class="text-center text-danger">{{errorMessage}}</p>
-                        <button class="btn btn-primary" [routerLink]="['/movies']">Search for movies here <i class="bi-arrow-right"></i></button>
+                        <button class="btn btn-primary" [routerLink]="['/movies']">Search movies here <i
+                                class="bi-arrow-right"></i></button>
                     </div>
                 </div>
             </div>
@@ -44,28 +45,30 @@
             <div *ngIf="allSearchedKeywords.length > 0" class="table-responsive">
                 <table class="table table-striped table-dark table-hover">
                     <thead>
-                      <tr>
-                        <th scope="col">S.no</th>
-                        <th scope="col">Keywords</th>
-                        <th scope="col">Date</th>
-                        <th scope="col"><button class="btn btn-outline-light btn-sm" (click)="clearItemFromLocalStorage('allSearches')">Delete all</button></th>
-                      </tr>
+                        <tr>
+                            <th scope="col">Keywords</th>
+                            <th scope="col">Date</th>
+                            <th scope="col"><a
+                                    (click)="clearItemFromLocalStorage('allSearches')"><i class="bi-trash-fill"></i></a></th>
+                        </tr>
                     </thead>
                     <tbody>
-                      <tr *ngFor="let obj of allSearchedKeywords; let j = index">
-                        <th scope="row">{{j + 1}}</th>
-                        <td>{{obj.searchedText}}</td>
-                        <td>{{obj.time | date : 'medium'}}</td>
-                        <td><button class="btn btn-danger btn-sm" (click)="deleteSearchedKeywordsFromLocalStorage(obj.searchedText)">Delete</button></td>
-                      </tr>
+                        <tr *ngFor="let obj of allSearchedKeywords">
+                            <td>{{obj.searchedText}}</td>
+                            <td>{{obj.time | date : 'medium'}}</td>
+                            <td><button class="btn btn-danger btn-sm"
+                                    (click)="deleteSearchedKeywordsFromLocalStorage(obj.searchedText)">Delete</button>
+                            </td>
+                        </tr>
                     </tbody>
-                  </table>
+                </table>
             </div>
             <div *ngIf="searchesErrorMessage" class="row">
                 <div class="col-12 col-lg-8 offset-lg-2">
                     <div class="jumbotron text-center mt-4">
                         <p class="text-center text-danger">{{searchesErrorMessage}}</p>
-                        <button class="btn btn-primary" [routerLink]="['/movies']">Search for movies here <i class="bi-arrow-right"></i></button>
+                        <button class="btn btn-primary" [routerLink]="['/movies']">Search movies here <i
+                                class="bi-arrow-right"></i></button>
                     </div>
                 </div>
             </div>

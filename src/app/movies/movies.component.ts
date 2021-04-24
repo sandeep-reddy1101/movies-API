@@ -140,6 +140,7 @@ export class MoviesComponent implements OnInit {
     }
   }
 
+  //Function to remove movie from viewed movies key in local storage
   removeMovieFromLocalStorage(movie: any) {
     this.viewedMoviesInLocalStorage = this.viewedMoviesInLocalStorage.filter(data => {
       if (data.imdbID === movie.imdbID) {
@@ -150,8 +151,10 @@ export class MoviesComponent implements OnInit {
     })
   }
 
+  //Adding values to all seaches and all viewed variable in local storage
   addingAllSearchedAndViewedMoviesIntoLocalStorage(variable_name: string, movies: any) {
     let time = new Date();
+    //Adding time data
     if(variable_name === 'allSearches'){
       let obj = {
         'searchedText' : movies,
@@ -161,7 +164,7 @@ export class MoviesComponent implements OnInit {
     }else if(variable_name === 'allViewed'){
       movies.viewedTime = time;
     }
-    console.log('all searches', movies)
+
     let x = localStorage.getItem(variable_name);
     if (x) {
       if (JSON.parse(x).length > 0) {
