@@ -23,7 +23,7 @@
                                 <div *ngFor="let movie of moviesArr" class="{{columnClassForCard}} mb-3">
                                     <div *ngIf="movie" class="movie-img">
                                         <a [routerLink]="['/movie', movie.imdbID]"><img src="{{movie.Poster}}"
-                                                alt="{{movie.Title}} poster" class="img-fluid rounded" width="100%"
+                                                alt="{{movie.Title}} poster" class="img-fluid rounded-lg" width="100%"
                                                 [style.height]="cardHeightClass" /></a>
                                     </div>
                                 </div>

@@ -7,7 +7,8 @@ import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { MoviesComponent } from './movies/movies.component';
 import { SuggestionsComponent } from './suggestions/suggestions.component';
-import { MovieDetailsComponent } from './movie-details/movie-details.component'
+import { MovieDetailsComponent } from './movie-details/movie-details.component';
+import { DashboardComponent } from './dashboard/dashboard.component'
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { MovieDetailsComponent } from './movie-details/movie-details.component'
     NavbarComponent,
     MoviesComponent,
     SuggestionsComponent,
-    MovieDetailsComponent
+    MovieDetailsComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
